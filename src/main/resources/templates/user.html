@@ -7,7 +7,6 @@
 </head>
 <body>
 
-<!-- Navbar -->
 <nav class="navbar navbar-dark bg-dark px-3">
     <span class="navbar-text text-white fw-bold">
         <span th:text="${user.email}"></span>
@@ -21,7 +20,6 @@
 
 <div class="d-flex" style="min-height: calc(100vh - 56px);">
 
-    <!-- Sidebar -->
     <div class="bg-white border-end" style="width: 220px; min-width: 220px;">
         <div class="list-group list-group-flush">
             <a href="/admin" class="list-group-item list-group-item-action text-primary border-0 py-3">Admin</a>
@@ -29,7 +27,6 @@
         </div>
     </div>
 
-    <!-- Main content -->
     <div class="flex-grow-1 p-4">
         <h3 class="mb-3">User information</h3>
         <div class="border rounded p-3" style="max-width: 500px;">
@@ -37,7 +34,6 @@
                 <tr><th>ID</th><td th:text="${user.id}"></td></tr>
                 <tr><th>First Name</th><td th:text="${user.firstName}"></td></tr>
                 <tr><th>Last Name</th><td th:text="${user.lastName}"></td></tr>
-                <tr><th>Age</th><td th:text="${user.age}"></td></tr>
                 <tr><th>Email</th><td th:text="${user.email}"></td></tr>
                 <tr><th>Username</th><td th:text="${user.username}"></td></tr>
                 <tr><th>Role</th><td th:text="${user.roles}"></td></tr>

@@ -7,7 +7,6 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
 import java.util.Set;
 
 @Component
@@ -30,8 +29,8 @@ public class DataInitializer implements CommandLineRunner {
         Role roleUser = roleRepository.save(new Role("ROLE_USER"));
         Role roleAdmin = roleRepository.save(new Role("ROLE_ADMIN"));
 
-        User admin = new User("admin", passwordEncoder.encode("admin"), "Admin", "Adminov", 35, "admin@example.com", Set.of(roleUser, roleAdmin));
-        User user = new User("user", passwordEncoder.encode("user"), "User", "Userov", 30, "user@example.com", Set.of(roleUser));
+        User admin = new User("admin", passwordEncoder.encode("admin"), "Admin", "Adminov", "admin@example.com", Set.of(roleUser, roleAdmin));
+        User user = new User("user", passwordEncoder.encode("user"), "User", "Userov", "user@example.com", Set.of(roleUser));
 
         userRepository.save(admin);
         userRepository.save(user);

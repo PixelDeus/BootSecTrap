@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<!-- Navbar -->
 <nav class="navbar navbar-dark bg-dark px-3">
     <span class="navbar-text text-white fw-bold">
         <span th:text="${#authentication.principal.email}"></span>
@@ -22,7 +21,6 @@
 
 <div class="d-flex" style="min-height: calc(100vh - 56px);">
 
-    <!-- Sidebar -->
     <div class="bg-white border-end" style="width: 220px; min-width: 220px;">
         <div class="list-group list-group-flush">
             <a href="/admin" class="list-group-item list-group-item-action active bg-primary text-white border-0 py-3">Admin</a>
@@ -30,11 +28,9 @@
         </div>
     </div>
 
-    <!-- Main content -->
     <div class="flex-grow-1 p-4">
         <h3 class="mb-3">Admin panel</h3>
 
-        <!-- Tabs -->
         <ul class="nav nav-tabs mb-3" id="adminTabs">
             <li class="nav-item">
                 <a class="nav-link active text-dark" id="tab-table" href="#" onclick="showTab('table'); return false;">Users table</a>
@@ -44,7 +40,6 @@
             </li>
         </ul>
 
-        <!-- Users table tab -->
         <div id="pane-table">
             <div class="border rounded p-3">
                 <h6 class="mb-3">All users</h6>
@@ -54,7 +49,6 @@
                         <th>ID</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Age</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Edit</th>
@@ -66,7 +60,6 @@
                         <td th:text="${user.id}"></td>
                         <td th:text="${user.firstName}"></td>
                         <td th:text="${user.lastName}"></td>
-                        <td th:text="${user.age}"></td>
                         <td th:text="${user.email}"></td>
                         <td th:text="${user.roles}"></td>
                         <td>
@@ -83,7 +76,6 @@
             </div>
         </div>
 
-        <!-- New User tab -->
         <div id="pane-new" style="display:none;">
             <div class="border rounded p-4" style="max-width: 500px;">
                 <form method="post" th:action="@{/admin/add}">
@@ -91,8 +83,6 @@
                         <input type="text" name="firstName" class="form-control" required></div>
                     <div class="mb-2"><label class="form-label">Last Name</label>
                         <input type="text" name="lastName" class="form-control" required></div>
-                    <div class="mb-2"><label class="form-label">Age</label>
-                        <input type="number" name="age" class="form-control" required></div>
                     <div class="mb-2"><label class="form-label">Email</label>
                         <input type="email" name="email" class="form-control" required></div>
                     <div class="mb-2"><label class="form-label">Username</label>
@@ -126,8 +116,6 @@
                         <input type="text" name="firstName" id="editFirstName" class="form-control" required></div>
                     <div class="mb-2"><label class="form-label">Last Name</label>
                         <input type="text" name="lastName" id="editLastName" class="form-control" required></div>
-                    <div class="mb-2"><label class="form-label">Age</label>
-                        <input type="number" name="age" id="editAge" class="form-control" required></div>
                     <div class="mb-2"><label class="form-label">Email</label>
                         <input type="email" name="email" id="editEmail" class="form-control" required></div>
                     <div class="mb-2"><label class="form-label">Username</label>
@@ -187,7 +175,6 @@
                 document.getElementById('editId').value = user.id;
                 document.getElementById('editFirstName').value = user.firstName;
                 document.getElementById('editLastName').value = user.lastName;
-                document.getElementById('editAge').value = user.age;
                 document.getElementById('editEmail').value = user.email;
                 document.getElementById('editUsername').value = user.username;
                 document.getElementById('editPassword').value = '';
