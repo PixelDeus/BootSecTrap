@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.service;
 
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.List;
@@ -11,8 +10,11 @@ import java.util.Set;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+
+    public RoleServiceImpl(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
 
     @Override
     public List<Role> getAllRoles() {
@@ -26,5 +28,10 @@ public class RoleServiceImpl implements RoleService {
             roleRepository.findById(id).ifPresent(roles::add);
         }
         return roles;
+    }
+
+    @Override
+    public Role saveRole(Role role) {
+        return roleRepository.save(role);
     }
 }

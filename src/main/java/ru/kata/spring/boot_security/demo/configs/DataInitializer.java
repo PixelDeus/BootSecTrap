@@ -2,37 +2,31 @@ package ru.kata.spring.boot_security.demo.configs;
 
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.RoleRepository;
-import ru.kata.spring.boot_security.demo.repository.UserRepository;
+import ru.kata.spring.boot_security.demo.service.RoleService;
+import ru.kata.spring.boot_security.demo.service.UserService;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import java.util.Set;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    private final RoleRepository roleRepository;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
+    private final UserService userService;
 
-    public DataInitializer(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.roleRepository = roleRepository;
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    public DataInitializer(RoleService roleService, UserService userService) {
+        this.roleService = roleService;
+        this.userService = userService;
     }
 
     @Override
     public void run(String... args) {
-        if (roleRepository.count() > 0) return;
+        if (!roleService.getAllRoles().isEmpty()) return;
 
-        Role roleUser = roleRepository.save(new Role("ROLE_USER"));
-        Role roleAdmin = roleRepository.save(new Role("ROLE_ADMIN"));
+        Role roleUser = roleService.saveRole(new Role("ROLE_USER"));
+        Role roleAdmin = roleService.saveRole(new Role("ROLE_ADMIN"));
 
-        User admin = new User("admin", passwordEncoder.encode("admin"), "Admin", "Adminov", "admin@example.com", Set.of(roleUser, roleAdmin));
-        User user = new User("user", passwordEncoder.encode("user"), "User", "Userov", "user@example.com", Set.of(roleUser));
-
-        userRepository.save(admin);
-        userRepository.save(user);
+        userService.addUser(new User("admin", "admin", "Admin", "Adminov", "admin@example.com", Set.of(roleUser, roleAdmin)));
+        userService.addUser(new User("user", "user", "User", "Userov", "user@example.com", Set.of(roleUser)));
     }
 }
